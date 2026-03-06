@@ -25,7 +25,8 @@
         <main class="bg-[#f8fafc] font-['Geist',sans-serif]">
             <!-- *Git Issues Tracker Login Page -->
             <section
-                class="container mx-auto flex items-center justify-center min-h-screen  "
+                id="login_page"
+                class="hidden container mx-auto flex items-center justify-center min-h-screen"
             >
                 <div
                     class="w-full sm:w-[520px] shadow-md p-4 sm:p-8 rounded-md bg-white space-y-6"
@@ -53,7 +54,7 @@
                                 type="text"
                                 name=""
                                 placeholder="Enter Username"
-                                id=""
+                                id="username"
                             />
                             <p class="text-primary text-[14px]">
                                 Default: admin
@@ -66,13 +67,14 @@
                                 type="password"
                                 name=""
                                 placeholder="Enter Password"
-                                id=""
+                                id="password"
                             />
                             <p class="text-primary text-[14px]">
                                 Default: admin123
                             </p>
                         </div>
                         <input
+                            id="sign_btn"
                             class="btn btn-primary w-full my-6 text-white"
                             type="submit"
                             value="Sign In"
@@ -105,6 +107,24 @@
                 </div>
             </section>
         </main>
+
+        
+
+       <!-- *UserName Not Match Modal -->
+         <dialog id="user_not_match" class="modal">
+            <div class="modal-box">
+                <div id="modal_content">
+
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn btn-primary">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+        
 
         <script src="main.js"></script>
     </body>
