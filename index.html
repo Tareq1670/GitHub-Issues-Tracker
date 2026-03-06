@@ -19,10 +19,18 @@
             href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
             rel="stylesheet"
         />
+        <!-- *FontAwesome CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+            integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
         <title>GitHub Issues Tracker</title>
     </head>
     <body class="">
-        <main class="bg-[#f8fafc] font-['Geist',sans-serif]">
+        <main class="bg-[#f8fafc] font-['Geist',sans-serif] min-h-screen">
             <!-- *Git Issues Tracker Login Page -->
             <section
                 id="login_page"
@@ -106,16 +114,119 @@
                     </div>
                 </div>
             </section>
+
+            <section>
+                <!-- Main Issues Tracker Navbar -->
+                <nav
+                    class="navbar border border-base-300 bg-white flex justify-between items-center py-[10px] lg:py-[20px] px-1 lg:px-20 mb-[20px] md:mb-[60px]"
+                >
+                    <div class="left flex items-center space-x-1">
+                        <img
+                            class="h-9 w-9"
+                            src="assets/github-logo.png"
+                            alt=""
+                        />
+                        <h2 class="hidden lg:flex text-[24px] font-semibold">
+                            GitHub Issues Tracker
+                        </h2>
+                    </div>
+                    <div class="right">
+                        <div class="join">
+                            <div>
+                                <label
+                                    class="input outline-none validator join-item w-[180px] md:w-[300px] rounded-sm"
+                                >
+                                    <i
+                                        class="fa-solid fa-magnifying-glass opacity-50"
+                                    ></i>
+                                    <input
+                                        type="text"
+                                        placeholder="Search issues..."
+                                        required
+                                    />
+                                </label>
+                            </div>
+                            <button
+                                class="btn btn-primary join-item ml-1 md:ml-4 flex items-center"
+                            >
+                                <i class="fa-solid fa-plus text-[12px]"></i> New
+                                Issue
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Category Section -->
+                <section
+                    class="container mx-auto bg-white border-base-300 shadow-sm rounded-lg p-3 md:p-6 space-x-2 mb-2 md:mb-4"
+                >
+                    <button
+                        id="all_issues_btn"
+                        class="w-[100px] md:w-[120px] category_btn"
+                    >
+                        All
+                    </button>
+                    <button
+                        id="open_issues_btn"
+                        class="w-[100px] md:w-[120px] category_btn"
+                    >
+                        Open
+                    </button>
+                    <button
+                        id="closed_issues_btn"
+                        class="w-[100px] md:w-[120px] category_btn"
+                    >
+                        Closed
+                    </button>
+                </section>
+
+                <!-- Count Issues Section -->
+                <section
+                    class="container mx-auto bg-white border-base-300 shadow-sm rounded-lg p-3 md:p-6 flex flex-col md:flex-row justify-between md:items-center"
+                >
+                    <div class="left flex items-center space-x-2">
+                        <div
+                            class="h-[50px] w-[50px] bg-[#a855f7FF]/25 rounded-full flex justify-center items-center"
+                        >
+                            <img src="assets/Aperture.png" alt="" />
+                        </div>
+                        <div class="content">
+                            <h2 class="text-[20px] font-semibold">
+                                <span>50</span> Issues
+                            </h2>
+                            <p class="text-[#64748bFF]">
+                                Track and manage your project issues
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right flex space-x-4">
+                        <div class="space-x-2 flex items-center">
+                            <div class="bg-success h-3 w-3 rounded-full"></div>
+                            <p>Open</p>
+                        </div>
+                        <div class="space-x-2 flex items-center">
+                            <div
+                                class="bg-[#a855f7FF] h-3 w-3 rounded-full"
+                            ></div>
+                            <p>Closed</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Main Issue Section -->
+                <section
+                    class="container mx-auto bg-white border-base-300 shadow-sm rounded-lg p-3 md:p-6"
+                >
+                    <div id="card_container" class="card_container grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+                    </div>
+                </section>
+            </section>
         </main>
 
-        
-
-       <!-- *UserName Not Match Modal -->
-         <dialog id="user_not_match" class="modal">
+        <!-- *UserName Not Match Modal -->
+        <dialog id="user_not_match" class="modal">
             <div class="modal-box">
-                <div id="modal_content">
-
-                </div>
+                <div id="modal_content"></div>
                 <div class="modal-action">
                     <form method="dialog">
                         <!-- if there is a button in form, it will close the modal -->
@@ -124,7 +235,6 @@
                 </div>
             </div>
         </dialog>
-        
 
         <script src="main.js"></script>
     </body>
