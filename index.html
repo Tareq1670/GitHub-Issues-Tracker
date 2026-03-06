@@ -21,7 +21,91 @@
         />
         <title>GitHub Issues Tracker</title>
     </head>
-    <body>
-        
+    <body class="">
+        <main class="bg-[#f8fafc] font-['Geist',sans-serif]">
+            <!-- *Git Issues Tracker Login Page -->
+            <section
+                class="container mx-auto flex items-center justify-center min-h-screen  "
+            >
+                <div
+                    class="w-full sm:w-[520px] shadow-md p-4 sm:p-8 rounded-md bg-white space-y-6"
+                >
+                    <!-- *Logo header -->
+                    <div class="flex flex-col mb-6 items-center">
+                        <img
+                            class="h-[100px] w-[100px] mb-6"
+                            src="assets/github-logo.png"
+                            alt=""
+                        />
+                        <h2 class="text-[24px] font-semibold mb-1">
+                            GitHub Issues Tracker
+                        </h2>
+                        <p class="text-[#64748bFF]">
+                            sign in to manage your issues
+                        </p>
+                    </div>
+                    <!-- *Login Form -->
+                    <form class="space-y-4" action="">
+                        <div class="flex flex-col space-y-2">
+                            <label class="font-medium" for="">Username</label>
+                            <input
+                                class="w-full p-4 rounded-lg outline-none border border-[#e4e4e7FF] mb-[6px]"
+                                type="text"
+                                name=""
+                                placeholder="Enter Username"
+                                id=""
+                            />
+                            <p class="text-primary text-[14px]">
+                                Default: admin
+                            </p>
+                        </div>
+                        <div class="mb-0">
+                            <label class="font-medium" for="">Password</label>
+                            <input
+                                class="w-full p-4 rounded-lg outline-none border border-[#e4e4e7FF] mb-[6px]"
+                                type="password"
+                                name=""
+                                placeholder="Enter Password"
+                                id=""
+                            />
+                            <p class="text-primary text-[14px]">
+                                Default: admin123
+                            </p>
+                        </div>
+                        <input
+                            class="btn btn-primary w-full my-6 text-white"
+                            type="submit"
+                            value="Sign In"
+                        />
+                        <div class="flex items-center justify-between gap-2">
+                            <div
+                                class="h-[0.01px] border border-[#e4e4e7FF] w-full"
+                            ></div>
+                            <p>OR</p>
+                            <div
+                                class="h-[0.01px] border border-[#e4e4e7FF] w-full"
+                            ></div>
+                        </div>
+                    </form>
+                    <!-- *Demo option -->
+                    <div class="text-center">
+                        <p class="text-[#64748bFF] text-[14px] mb-2">
+                            Demo Credentials
+                        </p>
+                        <div class="p-6 bg-base-200 space-y-0">
+                            <h2 class="font-semibold">
+                                Username: <span class="font-normal">admin</span>
+                            </h2>
+                            <h2 class="font-semibold">
+                                Password:
+                                <span class="font-normal">admin123</span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script src="main.js"></script>
     </body>
 </html>
