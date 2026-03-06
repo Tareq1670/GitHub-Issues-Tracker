@@ -8,7 +8,10 @@ const loginPage = document.getElementById("login_page");
 const allIssuesBtn = document.getElementById("all_issues_btn");
 const openIssuesBtn = document.getElementById("open_issues_btn");
 const closedIssuesBtn = document.getElementById("closed_issues_btn");
-const cardContainer = document.getElementById("card_container")
+const cardContainer = document.getElementById("card_container");
+const countIssues = document.getElementById("issues_count")
+const loadingSection = document.getElementById("loading");
+const issuesContent = document.getElementById("issues_content");
 
 // Submit Button Event
 submitBtn.addEventListener("click", (e) => {
@@ -83,7 +86,7 @@ const displayIssues = (data) => {
     data.forEach(item => {
         const div = document.createElement("div");
         div.classList =`${
-            item.status === "open"?`card shadow-sm border border-t-5 border-success`:`card shadow-sm border border-t-5 border-primary`
+            item.status === "open"?`card shadow-sm border border-t-5 border-success`:`card shadow-sm border border-t-5 border-[#a754f5]`
         }`
         div.innerHTML = `
                                     <div class="card-body">
@@ -141,7 +144,7 @@ const displayIssues = (data) => {
                             <div
                                 class="border border-base-300 p-6 text-[12px] text-[#64748B]"
                             >
-                                <p>#1 by ${item.author}</p>
+                                <p>#${item.id} by ${item.author}</p>
                                 <p>${item.updatedAt.slice(0,10)}</p>
                             </div>
         `
@@ -152,6 +155,7 @@ const displayIssues = (data) => {
 
 //All Issues
 allIssuesBtn.addEventListener("click",()=>{
+    startLoading();
     allIssues()
 })
 const allIssues = async () => {
@@ -159,6 +163,8 @@ const allIssues = async () => {
     allIssuesBtn.classList.add("btn-primary");
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await res.json();
+    countIssues.textContent = data.data.length;
+    stopLoading()
     displayIssues(data.data);
     
 };
@@ -171,9 +177,18 @@ allIssues();
 openIssuesBtn.addEventListener("click",()=>{
     openIssues()
 })
-const openIssues = () => {
+const openIssues =async () => {
     toggleBtn();
+    startLoading()
     openIssuesBtn.classList.add("btn-primary");
+    const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+    const data = await res.json();
+    const allData = data.data;
+    
+    const openIssues = allData.filter(item => item.status === "open");
+    countIssues.textContent = openIssues.length;
+    stopLoading()
+    displayIssues(openIssues)
     
 };
 
@@ -183,8 +198,31 @@ const openIssues = () => {
 closedIssuesBtn.addEventListener("click",()=>{
     closedIssues()
 })
-const closedIssues = () => {
+const closedIssues =async () => {
     toggleBtn();
+    startLoading();
     closedIssuesBtn.classList.add("btn-primary");
-    console.log("open closed");
+    const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
+    const data = await res.json();
+    const allData = data.data
+
+    const closedIssues = allData.filter(item => item.status === "closed");
+    countIssues.textContent = closedIssues.length;
+    stopLoading();
+    displayIssues(closedIssues);
 };
+
+
+const startLoading = () =>{
+    loadingSection.classList.add("flex")
+    loadingSection.classList.remove("hidden")
+    issuesContent.classList.add("hidden")
+    issuesContent.classList.remove("flex");
+}
+
+const stopLoading = () => {
+        loadingSection.classList.remove("flex")
+    loadingSection.classList.add("hidden")
+    issuesContent.classList.remove("hidden")
+    issuesContent.classList.add("flex");
+}

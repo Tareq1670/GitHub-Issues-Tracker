@@ -118,7 +118,7 @@
             <section>
                 <!-- Main Issues Tracker Navbar -->
                 <nav
-                    class="navbar border border-base-300 bg-white flex justify-between items-center py-[10px] lg:py-[20px] px-1 lg:px-20 mb-[20px] md:mb-[60px]"
+                    class="navbar border border-base-300 bg-white flex justify-between items-center py-[10px] lg:py-[20px] px-1 lg:px-20 mb-[20px] md:mb-[60px] sticky top-0 z-50"
                 >
                     <div class="left flex items-center space-x-1">
                         <img
@@ -182,17 +182,17 @@
 
                 <!-- Count Issues Section -->
                 <section
-                    class="container mx-auto bg-white border-base-300 shadow-sm rounded-lg p-3 md:p-6 flex flex-col md:flex-row justify-between md:items-center"
+                    class="container mx-auto bg-white border-base-300 shadow-sm rounded-lg rounded-b-none p-3 md:p-6 flex flex-col md:flex-row justify-between md:items-center mb-[1px]"
                 >
                     <div class="left flex items-center space-x-2">
                         <div
-                            class="h-[50px] w-[50px] bg-[#a855f7FF]/25 rounded-full flex justify-center items-center"
+                            class="h-[50px] w-[50px] bg-[#a754f5]/25 rounded-full flex justify-center items-center"
                         >
                             <img src="assets/Aperture.png" alt="" />
                         </div>
                         <div class="content">
                             <h2 class="text-[20px] font-semibold">
-                                <span>50</span> Issues
+                                <span id="issues_count">50</span> Issues
                             </h2>
                             <p class="text-[#64748bFF]">
                                 Track and manage your project issues
@@ -206,7 +206,7 @@
                         </div>
                         <div class="space-x-2 flex items-center">
                             <div
-                                class="bg-[#a855f7FF] h-3 w-3 rounded-full"
+                                class="bg-[#a754f5] h-3 w-3 rounded-full"
                             ></div>
                             <p>Closed</p>
                         </div>
@@ -214,8 +214,12 @@
                 </section>
 
                 <!-- Main Issue Section -->
+                 <section id="loading" class=" hidden container mx-auto bg-white border-base-300 flex items-center justify-center h-56 p-3 md:p-6">
+                    <span class="loading loading-dots loading-lg"></span>
+                 </section>
                 <section
-                    class="container mx-auto bg-white border-base-300 shadow-sm rounded-lg p-3 md:p-6"
+                    id="issues_content"
+                    class="hidden container mx-auto bg-white border-base-300 shadow-sm rounded-lg rounded-t-none p-3 md:p-6"
                 >
                     <div id="card_container" class="card_container grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
                     </div>
