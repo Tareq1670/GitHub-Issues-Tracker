@@ -34,7 +34,7 @@
             <!-- *Git Issues Tracker Login Page -->
             <section
                 id="login_page"
-                class="hidden container mx-auto flex items-center justify-center min-h-screen"
+                class="container mx-auto flex items-center justify-center min-h-screen"
             >
                 <div
                     class="w-full sm:w-[520px] shadow-md p-4 sm:p-8 rounded-md bg-white space-y-6"
@@ -115,7 +115,7 @@
                 </div>
             </section>
 
-            <section>
+            <section id="main_container" class="hidden">
                 <!-- Main Issues Tracker Navbar -->
                 <nav
                     class="navbar border border-base-300 bg-white flex justify-between items-center py-[10px] lg:py-[20px] px-1 lg:px-20 mb-[20px] md:mb-[60px] sticky top-0 z-50"
@@ -239,7 +239,7 @@
                 <div class="modal-action">
                     <form method="dialog">
                         <!-- if there is a button in form, it will close the modal -->
-                        <button class="btn btn-primary">Close</button>
+                        <button class="btn btn-primary outline-none">Close</button>
                     </form>
                 </div>
             </div>

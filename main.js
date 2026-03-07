@@ -15,6 +15,7 @@ const issuesContent = document.getElementById("issues_content");
 const popModalBox = document.getElementById("pop_modal_box");
 const popModalContent = document.getElementById("pop_modal_content");
 const loadingModal = document.getElementById("loading_modal");
+const mainContainer = document.getElementById("main_container");
 
 // Submit Button Event
 submitBtn.addEventListener("click", (e) => {
@@ -23,11 +24,11 @@ submitBtn.addEventListener("click", (e) => {
     const userValue = userName.value.trim();
     const passValue = userPass.value.trim();
 
-    if (!userValue) {
+    if (!userValue || !userPass) {
         modalContent.innerHTML = `
              <h3 class="text-lg font-bold">Invalid!</h3>
                 <p class="py-4">
-                    Please Input Your Username!
+                    Please Input Your Username and Password..!
                 </p>`;
         modalName.showModal();
     } else {
@@ -60,12 +61,13 @@ submitBtn.addEventListener("click", (e) => {
                     modalContent.innerHTML = `
              <h3 class="text-lg font-bold">Success!</h3>
                 <p class="py-4">
-                    You are Login Success
+                    You are Login Success..🎈
                 </p>`;
                     modalName.showModal();
                     userName.value = "";
                     userPass.value = "";
                     loginPage.classList.add("hidden");
+                    mainContainer.classList.remove("hidden")
                 }
             }
         }
@@ -113,21 +115,21 @@ const displayIssues = (data) => {
                                         ${
                                             item.priority === "high"
                                                 ? `<div
-                                            class="badge badge-error badge-soft border-error/30 rounded-full"
+                                            class="badge badge-error badge-soft border-error/30 rounded-full uppercase"
                                         >
-                                            HIGH
+                                            ${item.priority}
                                         </div>`
                                                 : item.priority === "medium"
                                                   ? `<div
-                                            class="badge badge-warning badge-soft border-warning/30 rounded-full"
+                                            class="badge badge-warning badge-soft border-warning/30 rounded-full uppercase"
                                         >
-                                            MEDIUM
+                                            ${item.priority}
                                         </div>`
                                                   : item.priority === "low"
                                                     ? `<div
-                                            class="badge badge-ghost badge-soft border-neutral/30 rounded-full"
+                                            class="badge badge-ghost badge-soft border-neutral/30 rounded-full uppercase"
                                         >
-                                            LOW
+                                            ${item.priority}
                                         </div>`
                                                     : ""
                                         }
@@ -146,23 +148,23 @@ const displayIssues = (data) => {
                                     ${item.labels
                                         .map((label) =>
                                             label === "bug"
-                                                ? `<div class="badge badge-soft border-error/40 badge-error rounded-full"><i class="fa-solid fa-bug"></i> BUG</div>`
+                                                ? `<div class="badge badge-soft border-error/40 badge-error rounded-full uppercase"><i class="fa-solid fa-bug"></i>${label}</div>`
                                                 : label === "enhancement"
-                                                  ? `<div class="badge badge-soft border-success/40 badge-success rounded-full"><i class="fa-solid fa-wand-magic-sparkles"></i> ENHANCEMENT
+                                                  ? `<div class="badge badge-soft border-success/40 badge-success rounded-full uppercase"><i class="fa-solid fa-wand-magic-sparkles"></i> ${label}
                                     </div>`
                                                   : label === "help wanted"
-                                                    ? `<div class="badge badge-soft border-warning/40 badge-warning rounded-full"><i class="fa-regular fa-life-ring"></i>Help Wanted </div>`
+                                                    ? `<div class="badge badge-soft border-warning/40 badge-warning rounded-full uppercase"><i class="fa-regular fa-life-ring"></i>${label}</div>`
                                                     : label ===
                                                         "good first issue"
                                                       ? `<div
-                                    class="badge badge-soft border-primary/40 badge-primary rounded-full">
-                                   <i class="fa-solid fa-medal"></i> GOOD FIRST ISSUE
+                                    class="badge badge-soft border-primary/40 badge-primary rounded-full uppercase">
+                                   <i class="fa-solid fa-medal"></i> ${label}
                                    </div>`
                                                       : label ===
                                                           "documentation"
                                                         ? `<div
-                                    class="badge badge-soft border-secondary/40 badge-secondary rounded-full">
-                                   <i class="fa-brands fa-readme"></i> DOCUMENTATION
+                                    class="badge badge-soft border-secondary/40 badge-secondary rounded-full uppercase">
+                                   <i class="fa-brands fa-readme"></i> ${label}
                                    </div>`
                                                         : "",
                                         )
@@ -285,23 +287,23 @@ const displayModal = (data) => {
                                     ${data.labels
                                         .map((label) =>
                                             label === "bug"
-                                                ? `<div class="badge badge-soft border-error/40 badge-error rounded-full"><i class="fa-solid fa-bug"></i> BUG</div>`
+                                                ? `<div class="badge badge-soft border-error/40 badge-error rounded-full uppercase"><i class="fa-solid fa-bug"></i>${label}</div>`
                                                 : label === "enhancement"
-                                                  ? `<div class="badge badge-soft border-success/40 badge-success rounded-full"><i class="fa-solid fa-wand-magic-sparkles"></i> ENHANCEMENT
+                                                  ? `<div class="badge badge-soft border-success/40 badge-success rounded-full uppercase"><i class="fa-solid fa-wand-magic-sparkles"></i> ${label}
                                     </div>`
                                                   : label === "help wanted"
-                                                    ? `<div class="badge badge-soft border-warning/40 badge-warning rounded-full"><i class="fa-regular fa-life-ring"></i>HELP WANTED</div>`
+                                                    ? `<div class="badge badge-soft border-warning/40 badge-warning rounded-full uppercase"><i class="fa-regular fa-life-ring"></i>${label}</div>`
                                                     : label ===
                                                         "good first issue"
                                                       ? `<div
-                                    class="badge badge-soft border-primary/40 badge-primary rounded-full">
-                                   <i class="fa-solid fa-medal"></i> GOOD FIRST ISSUE
+                                    class="badge badge-soft border-primary/40 badge-primary rounded-full uppercase">
+                                   <i class="fa-solid fa-medal"></i> ${label}
                                    </div>`
                                                       : label ===
                                                           "documentation"
                                                         ? `<div
-                                    class="badge badge-soft border-secondary/40 badge-secondary rounded-full">
-                                   <i class="fa-brands fa-readme"></i> DOCUMENTATION
+                                    class="badge badge-soft border-secondary/40 badge-secondary rounded-full uppercase">
+                                   <i class="fa-brands fa-readme"></i> ${label}
                                    </div>`
                                                         : "",
                                         )
