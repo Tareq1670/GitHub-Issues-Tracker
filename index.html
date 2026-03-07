@@ -126,7 +126,7 @@
                             src="assets/github-logo.png"
                             alt=""
                         />
-                        <h2 class="hidden lg:flex text-[24px] font-semibold">
+                        <h2 class="hidden md:flex text-[24px] font-semibold">
                             GitHub Issues Tracker
                         </h2>
                     </div>
@@ -182,7 +182,7 @@
 
                 <!-- Count Issues Section -->
                 <section
-                    class="container mx-auto bg-white border-base-300 shadow-sm rounded-lg rounded-b-none p-3 md:p-6 flex flex-col md:flex-row justify-between md:items-center mb-[1px]"
+                    class="container mx-auto bg-white border-base-300 shadow-sm rounded-lg rounded-b-none p-3 md:p-6 flex flex-col md:flex-row justify-between md:items-center mb-[1px] space-y-2"
                 >
                     <div class="left flex items-center space-x-2">
                         <div
@@ -194,7 +194,7 @@
                             <h2 class="text-[20px] font-semibold">
                                 <span id="issues_count">50</span> Issues
                             </h2>
-                            <p class="text-[#64748bFF]">
+                            <p class="text-[#64748bFF] line-clamp-1">
                                 Track and manage your project issues
                             </p>
                         </div>
@@ -214,15 +214,20 @@
                 </section>
 
                 <!-- Main Issue Section -->
-                 <section id="loading" class=" hidden container mx-auto bg-white border-base-300 flex items-center justify-center h-56 p-3 md:p-6">
+                <section
+                    id="loading"
+                    class="hidden container mx-auto bg-white border-base-300 flex items-center justify-center h-56 p-3 md:p-6"
+                >
                     <span class="loading loading-dots loading-lg"></span>
-                 </section>
+                </section>
                 <section
                     id="issues_content"
                     class="hidden container mx-auto bg-white border-base-300 shadow-sm rounded-lg rounded-t-none p-3 md:p-6"
                 >
-                    <div id="card_container" class="card_container grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
-                    </div>
+                    <div
+                        id="card_container"
+                        class="card_container grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4"
+                    ></div>
                 </section>
             </section>
         </main>
@@ -235,6 +240,19 @@
                     <form method="dialog">
                         <!-- if there is a button in form, it will close the modal -->
                         <button class="btn btn-primary">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog id="pop_modal_box" class="modal">
+            <div class="modal-box">
+                <div id="pop_modal_content">
+                    
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn btn-primary outline-none">Close</button>
                     </form>
                 </div>
             </div>
