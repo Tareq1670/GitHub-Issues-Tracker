@@ -84,7 +84,7 @@ const toggleBtn = () => {
         btn.classList.remove("btn-primary");
     });
 };
-toggleBtn();
+
 
 // Display Issues
 const displayIssues = (data) => {
@@ -210,7 +210,10 @@ const allIssues = async () => {
     stopLoading();
     displayIssues(data.data);
 };
-allIssues();
+document.addEventListener("DOMContentLoaded",()=>{
+    toggleBtn();
+    allIssues();
+})
 
 // Open Issues
 
