@@ -3,7 +3,7 @@ const submitBtn = document.getElementById("sign_btn");
 const userName = document.getElementById("username");
 const userPass = document.getElementById("password");
 const modalContent = document.getElementById("modal_content");
-const modalName = document.getElementById("user_not_match");
+const modalName = document.getElementById("invalid_modal");
 const loginPage = document.getElementById("login_page");
 const allIssuesBtn = document.getElementById("all_issues_btn");
 const openIssuesBtn = document.getElementById("open_issues_btn");
@@ -16,6 +16,8 @@ const popModalBox = document.getElementById("pop_modal_box");
 const popModalContent = document.getElementById("pop_modal_content");
 const loadingModal = document.getElementById("loading_modal");
 const mainContainer = document.getElementById("main_container");
+const inputField = document.getElementById("input_field");
+const searchBtn = document.getElementById("search_btn");
 
 // Submit Button Event
 submitBtn.addEventListener("click", (e) => {
@@ -67,7 +69,7 @@ submitBtn.addEventListener("click", (e) => {
                     userName.value = "";
                     userPass.value = "";
                     loginPage.classList.add("hidden");
-                    mainContainer.classList.remove("hidden")
+                    mainContainer.classList.remove("hidden");
                 }
             }
         }
@@ -87,15 +89,24 @@ toggleBtn();
 // Display Issues
 const displayIssues = (data) => {
     cardContainer.innerHTML = "";
-    data.forEach((item) => {
+    if (!data.length) {
         const div = document.createElement("div");
-        div.onclick = () => getModal(item.id);
-        div.classList = `${
-            item.status === "open"
-                ? `card shadow-sm border-t-5 border-success`
-                : `card shadow-sm border-t-5 border-[#a754f5]`
-        }`;
-        div.innerHTML = `
+        div.classList = "h-[450px] flex items-center justify-center";
+        const h2 = document.createElement("h2");
+        h2.classList = "font-bold text-2xl text-[#64748B]";
+        h2.textContent = "There are no Issues..!";
+        div.appendChild(h2);
+        cardContainer.appendChild(div);
+    } else
+        data.forEach((item) => {
+            const div = document.createElement("div");
+            div.onclick = () => getModal(item.id);
+            div.classList = `${
+                item.status === "open"
+                    ? `card shadow-sm border-t-5 border-success`
+                    : `card shadow-sm border-t-5 border-[#a754f5]`
+            }`;
+            div.innerHTML = `
                                     <div  class="card-body">
                                 <div class="card_content">
                                     <div
@@ -151,7 +162,7 @@ const displayIssues = (data) => {
                                                 ? `<div class="badge badge-soft border-error/40 badge-error rounded-full uppercase"><i class="fa-solid fa-bug"></i>${label}</div>`
                                                 : label === "enhancement"
                                                   ? `<div class="badge badge-soft border-success/40 badge-success rounded-full uppercase"><i class="fa-solid fa-wand-magic-sparkles"></i> ${label}
-                                    </div>`
+                                                    </div>`
                                                   : label === "help wanted"
                                                     ? `<div class="badge badge-soft border-warning/40 badge-warning rounded-full uppercase"><i class="fa-regular fa-life-ring"></i>${label}</div>`
                                                     : label ===
@@ -179,8 +190,9 @@ const displayIssues = (data) => {
                                 <p>${item.updatedAt.slice(0, 10)}</p>
                             </div>
         `;
-        cardContainer.appendChild(div);
-    });
+            cardContainer.appendChild(div);
+        });
+    document.getElementById("issues_count").textContent = data.length;
 };
 
 //All Issues
@@ -195,7 +207,6 @@ const allIssues = async () => {
         "https://phi-lab-server.vercel.app/api/v1/lab/issues",
     );
     const data = await res.json();
-    countIssues.textContent = data.data.length;
     stopLoading();
     displayIssues(data.data);
 };
@@ -217,7 +228,6 @@ const openIssues = async () => {
     const allData = data.data;
 
     const openIssues = allData.filter((item) => item.status === "open");
-    countIssues.textContent = openIssues.length;
     stopLoading();
     displayIssues(openIssues);
 };
@@ -238,11 +248,11 @@ const closedIssues = async () => {
     const allData = data.data;
 
     const closedIssues = allData.filter((item) => item.status === "closed");
-    countIssues.textContent = closedIssues.length;
     stopLoading();
     displayIssues(closedIssues);
 };
 
+// Loading Start and Stop
 const startLoading = () => {
     loadingSection.classList.add("flex");
     loadingSection.classList.remove("hidden");
@@ -255,6 +265,8 @@ const stopLoading = () => {
     loadingSection.classList.add("hidden");
     issuesContent.classList.remove("hidden");
 };
+
+// Modal Handler
 
 const getModal = async (id) => {
     popModalContent.classList.add("hidden");
@@ -269,6 +281,7 @@ const getModal = async (id) => {
     displayModal(data.data);
 };
 
+// Display Modal
 const displayModal = (data) => {
     popModalContent.innerHTML = `
                         <h2 class="text-[24px] font-bold mb-2">${data.title}</h2>
@@ -279,7 +292,7 @@ const displayModal = (data) => {
                                 : `<div class="badge bg-[#a754f5] rounded-full text-white capitalize">${data.status}</div>`
                         }
                         <ul class="flex list-disc gap-6 text-[12px] text-[#64748B] ml-4 md:m-0">
-                            <li>${!data.assignee ? `No assignee` : `Opened by ${data.assignee}`}</li>
+                            <li>${!data.assignee ? `No Author` : `Opened by ${data.author}`}</li>
                             <li>${data.updatedAt.slice(0, 10)}</li>
                         </ul>
                     </div>
@@ -342,4 +355,40 @@ const displayModal = (data) => {
                         </div>
                     </div>
     `;
+};
+
+// Search Handler
+inputField.addEventListener("keydown",(e)=>{
+    if(e.key === "Enter"){
+        searchBtn.click();
+    }
+})
+
+searchBtn.addEventListener("click", () => {
+    toggleBtn();
+    startLoading();
+    const inputValue = inputField.value;
+    if (!inputValue.length) {
+        modalContent.innerHTML = `
+             <h3 class="text-lg font-bold">Invalid Search!</h3>
+                <p class="py-4">
+                    Please Input Your Search Issues..!
+                </p>`;
+        modalName.showModal();
+        allIssues()
+        inputField.value="";
+    }else{
+        searchIssues(inputValue)
+        inputField.value =""
+    }
+});
+
+// Search Fetch
+const searchIssues = async (issues) => {
+    const res = await fetch(
+        `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${issues}`,
+    );
+    const data = await res.json();
+    stopLoading();
+    displayIssues(data.data);
 };

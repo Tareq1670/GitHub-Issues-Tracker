@@ -29,7 +29,7 @@
         />
         <title>GitHub Issues Tracker</title>
     </head>
-    <body class="">
+    <body class="overflow-y-scroll">
         <main class="bg-[#f8fafc] font-['Geist',sans-serif] min-h-screen">
             <!-- *Git Issues Tracker Login Page -->
             <section
@@ -134,20 +134,21 @@
                         <div class="join">
                             <div>
                                 <label
-                                    class="input outline-none validator join-item w-[180px] md:w-[300px] rounded-sm"
+                                    class="input outline-none join-item w-[180px] md:w-[300px] rounded-sm"
                                 >
                                     <i
                                         class="fa-solid fa-magnifying-glass opacity-50"
                                     ></i>
                                     <input
+                                        id="input_field"
                                         type="text"
                                         placeholder="Search issues..."
-                                        required
                                     />
                                 </label>
                             </div>
                             <button
-                                class="btn btn-primary join-item ml-1 md:ml-4 flex items-center"
+                                id="search_btn"
+                                class="btn btn-primary ml-1 md:ml-4 flex items-center rounded-sm"
                             >
                                 <i class="fa-solid fa-plus text-[12px]"></i> New
                                 Issue
@@ -220,6 +221,7 @@
                 >
                     <span class="loading loading-dots loading-lg"></span>
                 </section>
+                
                 <section
                     id="issues_content"
                     class="hidden container mx-auto bg-white border-base-300 shadow-sm rounded-lg rounded-t-none p-3 md:p-6"
@@ -233,7 +235,7 @@
         </main>
 
         <!-- *UserName Not Match Modal -->
-        <dialog id="user_not_match" class="modal">
+        <dialog id="invalid_modal" class="modal">
             <div class="modal-box">
                 <div id="modal_content"></div>
                 <div class="modal-action">
