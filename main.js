@@ -103,8 +103,8 @@ const displayIssues = (data) => {
             div.onclick = () => getModal(item.id);
             div.classList = `${
                 item.status === "open"
-                    ? `card shadow-sm border-t-5 border-success`
-                    : `card shadow-sm border-t-5 border-[#a754f5]`
+                    ? `card shadow-sm border-t-5 border-success hover:shadow-md hover:shadow-green-500/20 hover:-translate-y-1 transition-all duration-200 ease-in`
+                    : `card shadow-sm border-t-5 border-[#a754f5] hover:shadow-md hover:shadow-[#a754f5]/30 hover:-translate-y-1 transition-all duration-200 ease-in`
             }`;
             div.innerHTML = `
                                     <div  class="card-body">
@@ -337,21 +337,21 @@ const displayModal = (data) => {
                             ${
                                 data.priority === "high"
                                     ? `<div
-                                            class="badge badge-error text-white rounded-full"
+                                            class="badge badge-error text-white rounded-full uppercase"
                                         >
-                                            HEIGH
+                                            ${data.priority}
                                         </div>`
                                     : data.priority === "medium"
                                       ? `<div
-                                            class="badge badge-warning text-white rounded-full"
+                                            class="badge badge-warning text-white rounded-full uppercase"
                                         >
-                                            MEDIUM
+                                            ${data.priority}
                                         </div>`
                                       : data.priority === "low"
                                         ? `<div
-                                            class="badge border border-neutral/30 rounded-full"
+                                            class="badge border border-neutral/30 rounded-full uppercase"
                                         >
-                                            LOW
+                                            ${data.priority}
                                         </div>`
                                         : ""
                             }
@@ -395,3 +395,14 @@ const searchIssues = async (issues) => {
     stopLoading();
     displayIssues(data.data);
 };
+
+// Live input Issues Search
+inputField.addEventListener("input", (e) => {
+    const inputValue = e.target.value;
+
+    if (inputValue.length > 0) {
+        searchIssues(inputValue);
+    } else {
+        allIssues();
+    }
+});
